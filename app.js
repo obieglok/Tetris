@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('.grid')
   let squares = Array.from(document.querySelectorAll('.grid div'))
-  const ScoreDisplay = document.querySelectorAll('#score') // # shows id
-  const StartBtn = document.querySelectorAll('#start-button')
+  const scoreDisplay = document.querySelector('#score') // # shows id
+  const startBtn = document.querySelector('#start-button')
   const width = 10
   let nextRandom = 0
+  let timerId
   // the tetrominoes
   const lTetrmonino = [
     // starts at position 1, then the next one is drawn at 11, 21 and 2
@@ -61,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
   //make the tetrominoes move down every second
-  timerId = setInterval(moveDown, 1000)
+  //timerId = setInterval(moveDown, 1000)
 
   //assign functions to keycode
 //  console.log(10)
@@ -160,4 +161,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
+  //add functioanlity to start button
+  startBtn.addEventListener('click', () => {
+  if (timerId) {
+    clearInterval(timerId)
+    timerId = null
+  } else {
+    draw()
+    timerId = setInterval(moveDown, 1000)
+    nextRandom = Math.floor(Math.random()*theTetrominoes.length)
+    displayShape()
+  }
+})
 })
