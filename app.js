@@ -59,10 +59,18 @@ document.addEventListener('DOMContentLoaded', () => {
   let current = theTetrominoes[random][currentRotation]
   // draw the tetromino
   function draw () {
-    current.forEach(index => {
-      squares[currentPosition + index].classList.add('tetromino')
-      squares[currentPosition + index].style.backgroundColor = colours[random]
-    })
+    const row= [0, 1, 2, 3, 4, 5, 6,7,8,9]
+    if(current.some(index => squares[currentPosition + index].classList.contains('taken'))){
+
+      //do nothin
+    }
+    else{
+      current.forEach(index => {
+        squares[currentPosition + index].classList.add('tetromino')
+        squares[currentPosition + index].style.backgroundColor = colours[random]
+      })
+    }
+
   }
 
   function undraw() {
@@ -202,6 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
           squares[index].classList.remove('taken')
           squares[index].classList.remove('tetromino')
           squares[index].style.backgroundColor = ''
+
         })
         const squaresRemoved = squares.splice(i, width)
         squares = squaresRemoved.concat(squares)
