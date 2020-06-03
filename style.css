@@ -24,7 +24,8 @@
   height: 80px;
   display: flex;
   flex-wrap: wrap;
-  background-color: yellow;
+  background-color: LavenderBlush;
+  border-style: solid;
 }
 .mini-grid div{
   height: 20px;

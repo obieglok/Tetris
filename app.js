@@ -120,9 +120,9 @@ document.addEventListener('DOMContentLoaded', () => {
       nextRandom=Math.floor(Math.random() * theTetrominoes.length)
       current = theTetrominoes[random][currentRotation]
       currentPosition = 4
+      addScore()
       draw()
       displayShape()
-      addScore()
       gameOver()
      }
   }
@@ -207,12 +207,12 @@ document.addEventListener('DOMContentLoaded', () => {
         score +=10
         scoreDisplay.innerHTML = score
         row.forEach(index => {
-          squares[index].classList.remove('taken')
-          squares[index].classList.remove('tetromino')
-          squares[index].style.backgroundColor = ''
+          squares[index].classList.remove('taken') //remove from taken classs
+          squares[index].classList.remove('tetromino')//remove from tetromino class
+          squares[index].style.backgroundColor = '' //delte the colour of them
 
         })
-        const squaresRemoved = squares.splice(i, width)
+        const squaresRemoved = squares.splice(i, width)//start index, how manyto delete
         squares = squaresRemoved.concat(squares)
         squares.forEach(cell => grid.appendChild(cell))
       }
