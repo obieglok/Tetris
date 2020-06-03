@@ -90,7 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     else if(e.keyCode === 38)
     {
-      rotate()
+      const isAtLeftEdge = current.some(index => (currentPosition + index) % width === 0)
+      const isAtRightEdge = current.some(index => (currentPosition + index) % width === width -1)
+      if(!isAtLeftEdge && !isAtRightEdge)rotate()
+
     }
     else if(e.keyCode === 39)
     {
@@ -197,6 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
   // add score
   function addScore() {
+    let scoreIndex=10
     for(let i = 0; i < 199; i +=width)
     {
       //define the row
@@ -204,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // to check if every square contains a class of taken
       if(row.every(index => squares[index].classList.contains('taken')))
       {
-        score +=10
+        score +=scoreIndex
         scoreDisplay.innerHTML = score
         row.forEach(index => {
           squares[index].classList.remove('taken') //remove from taken classs
@@ -215,8 +219,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const squaresRemoved = squares.splice(i, width)//start index, how manyto delete
         squares = squaresRemoved.concat(squares)
         squares.forEach(cell => grid.appendChild(cell))
+        scoreIndex+=5
       }
     }
+
   }
   //game moveRight
   function gameOver() {
